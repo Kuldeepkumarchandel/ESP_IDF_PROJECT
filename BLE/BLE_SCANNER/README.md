@@ -56,6 +56,43 @@ Run `idf.py -p PORT flash monitor` to build, flash and monitor the project.
 
 ## Example Output
 
+I (0) cpu_start: Starting scheduler on APP CPU.
+I (418) BLE_SCAN: BT scan
+
+
+I (428) BT_INIT: BT controller compile version [02bfb7f]
+I (428) phy_init: phy_version 540,a5d905b,Oct 20 2022,19:36:11
+I (468) system_api: Base MAC address is not set
+I (468) system_api: read default base MAC address from EFUSE
+I (468) BT_INIT: Bluetooth MAC: 84:f7:03:c0:44:e2
+
+I (508) BLE_SCAN: ESP_GAP_BLE_SCAN_PARAM_SET_COMPLETE_EVT
+
+I (508) BLE_SCAN: Scan parameters set, start scanning for 10 seconds
+
+
+I (518) BLE_SCAN: ESP_GAP_BLE_SCAN_START_COMPLETE_EVT
+
+I (518) BLE_SCAN: Scan started
+
+
+I (928) BLE_SCAN: ESP_GAP_BLE_SCAN_RESULT_EVT
+
+Device found: ADDR=73:2F:B8:43:72:75
+I (1118) BLE_SCAN: ESP_GAP_BLE_SCAN_RESULT_EVT
+
+Device found: ADDR=7A:39:8E:FD:EF:CD
+I (3308) BLE_SCAN: ESP_GAP_BLE_SCAN_RESULT_EVT
+
+Device found: ADDR=51:09:C4:45:CD:C5
+I (3938) BLE_SCAN: ESP_GAP_BLE_SCAN_RESULT_EVT
+
+Device found: ADDR=F9:6E:30:BE:74:37
+I (4518) BLE_SCAN: ESP_GAP_BLE_SCAN_RESULT_EVT
+
+Device found: ADDR=43:6C:23:8B:7B:15
+I (10518) BLE_SCAN: Scan complete
+
 ## Acknowledgments
 
 Special thanks to Espressif Systems for providing the ESP32S3 microcontroller and the associated development tools and libraries.
