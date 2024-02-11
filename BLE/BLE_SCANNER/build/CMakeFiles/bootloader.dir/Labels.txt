@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/CMakeFiles/bootloader
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/CMakeFiles/bootloader.rule
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/CMakeFiles/bootloader-complete.rule
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/KULDEEP/SVN/ESP_DEVELOPMENT/GIT/ESP_IDF_PROJECT/BLE/BLE_SCANNER/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
