@@ -3,7 +3,7 @@
 
 # ESP32 BLE Scanner
 
-ESP32 BLE Scanner is a simple Bluetooth Low Energy (BLE) scanning application developed using ESP32S3 microcontroller. It scans for nearby BLE devices and logs the discovered devices' addresses.
+ESP Based BLE Scanner is a simple Bluetooth Low Energy (BLE) scanning application developed using ESP32S3 microcontroller. It scans for nearby BLE devices and logs the discovered devices' addresses.
 
 ## Features
 
