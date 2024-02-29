@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/CMakeFiles/bootloader
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/CMakeFiles/bootloader.rule
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/CMakeFiles/bootloader-complete.rule
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/Data/GIT/ESP_IDF_PROJECT/BLE/BLE_SCAN_WITH_NAMES_MAC_ADDR/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
