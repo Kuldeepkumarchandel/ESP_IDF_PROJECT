@@ -55,7 +55,7 @@ Run `idf.py -p PORT flash monitor` to build, flash and monitor the project.
 
 
 ## Example Output
-
+```
 I (0) cpu_start: App cpu up.
 I (321) cpu_start: Pro cpu start user code
 I (321) cpu_start: cpu freq: 160000000
@@ -113,7 +113,7 @@ I (2128) BLE_SCAN: ESP_GAP_BLE_SCAN_RESULT_EVT
 
 Device found: ADDR=E3:F1:2C:C6:1F:F8
 I (10518) BLE_SCAN: Scan complete
-
+```
 ## Acknowledgments
 
 Special thanks to Espressif Systems for providing the ESP32S3 microcontroller and the associated development tools and libraries.
