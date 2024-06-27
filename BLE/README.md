@@ -1,3 +1,6 @@
+| Supported Targets | ESP32 | ESP32-C3 | ESP32-S3 | ESP32-S2 | ESP32-H6 |
+| ----------------- | ----- | -------- | -------- | -------- | -------- |
+
 # Bluetooth Low Energy (BLE) Overview
 
 ## 1. Introduction
@@ -13,7 +16,7 @@ BLE devices operate in four basic roles, with each role having distinct function
 
 ### 2.1 Central
 - **Role:** Master
-- **Function:** Scans for advertising devices and can initiate connections. Capable of connecting to multiple devices simultaneously.
+- **Function:** Scans for advertising devices and can initiate connections. Capable of connecting to multiple devices simultaneously. Remember only the master device has capability to scan for such advertising devices and initiate a connection request.
 - **Example:** A smartphone connecting to a fitness tracker.
 
 ### 2.2 Peripheral
@@ -36,6 +39,7 @@ BLE devices operate in four basic roles, with each role having distinct function
 In the BLE client-server model:
 - **Peripheral:** Acts as the server, advertising its presence.
 - **Central:** Acts as the client, scanning and initiating connections.
+  ![ nrfConnect app Screenshoot](Screenshot/SERVER_CLIENT.png)
 
 ## 4. BLE Architecture
 The BLE architecture consists of three main levels:
