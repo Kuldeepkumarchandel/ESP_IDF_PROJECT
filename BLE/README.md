@@ -39,10 +39,18 @@ BLE devices operate in four basic roles, with each role having distinct function
 In the BLE client-server model:
 - **Peripheral:** Acts as the server, advertising its presence.
 - **Central:** Acts as the client, scanning and initiating connections.
-  ![ nrfConnect app Screenshoot](Screenshot/SERVER_CLIENT.png)
+
+ 
+  
+  ![server-client image](screenshot/server_client.png)
+
+
+The Bluetooth is based on server/client communication. The server advertises his presence and the client scans the presence of the server. We need a pairing concept for transmitting or receiving data for security purposes. When two devices want to pair, they search for a common frequency to send or receive data. For connection, the client device needs server UUID's (service UUID, characteristics UUID, and device name). The server can be connected to only one device at a time.
 
 ## 4. BLE Architecture
 The BLE architecture consists of three main levels:
+
+![BLE architecture image](screenshot/ble_arc.png)
 
 1. **Controller (Hardware):**
    - Operates on the 2.4GHz ISM band.
