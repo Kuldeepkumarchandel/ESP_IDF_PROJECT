@@ -62,6 +62,15 @@ The BLE architecture consists of three main levels:
 
 3. **Application/Profiles:**
    - Interfaces directly with the GAP to handle device discovery and connection-related services.
+  
+     
+     ![BLE architecture image](screenshot/Profile_arch.jpg)
+
+
+
+     
+4. **Security Manager Protocol (SMP)**
+   - The Security Manager Protocol in BLE is a critical component that handles the security aspects of BLE communication, including pairing, bonding, and encryption.
 
 ## 5. Network Topology
 ### 5.1 Broadcast Topology
@@ -101,6 +110,16 @@ Every BLE device has a unique 48-bit address, categorized into public and random
 ## 8. Advertising Packet Structure
 The BLE advertising packet consists of a header and a payload:
 
+
+
+     
+  ![BLE architecture image](screenshot/adv_data.png)
+
+
+
+     
+
+
 1. **Header:**
    - **PDU Type:** Type of advertisement.
    - **Length:** Length of the payload.
@@ -118,5 +137,25 @@ Composed of multiple structures called advertisement data structures (AD structu
 - **Manufacturer Specific Data:** Custom advertising data defined by manufacturers.
 - **Flags:** 1-bit variables indicating properties or operational modes.
 
+  
+
+
+
+     
+  ![BLE architecture image](screenshot/Data_parse.png)
+
+
+
+     
+
+
+
+
+     
+  ![BLE architecture image](screenshot/Parse_dara.jpg)
+
+
+
+     
 
 
