@@ -6,6 +6,19 @@
 ## 1. Introduction
 Bluetooth Low Energy (BLE) is a low-energy Bluetooth protocol distinct from traditional Bluetooth, designed for data exchange between devices over short distances (typically up to 10 meters). BLE devices use scanning and advertising techniques for communication, which can be connection-oriented or connectionless.
 
+Due to its properties, BLE is suitable for applications that need to exchange small amounts of data periodically running on a coin cell. For example, BLE is of great use in healthcare, fitness, tracking, beacons, security, and home automation industries.
+
+
+  
+
+  
+     
+  ![BLE architecture image](screenshot/ble_exam.jpg)
+
+
+
+
+
 ## 2. BLE Modes
 BLE devices operate in four basic roles, with each role having distinct functionalities:
 
@@ -52,25 +65,51 @@ The BLE architecture consists of three main levels:
 
 ![BLE architecture image](screenshot/ble_arc.png)
 
-1. **Controller (Hardware):**
+4.1 **Controller (Hardware):**
    - Operates on the 2.4GHz ISM band.
    - Divided into 40 RF channels (3 for broadcasting: 37, 38, 39).
 
-2. **Host:**
+4.2 **Host:**
    - **GATT (Generic Attribute Profile):** Manages data through attributes accessible via the client-server model.
    - **GAP (General Access Profile):** Manages device discovery, connection establishment, and bonding processes.
+  
+   ### GATT
 
-3. **Application/Profiles:**
-   - Interfaces directly with the GAP to handle device discovery and connection-related services.
+   GATT stands for Generic Attributes and defines a hierarchical data structure exposed to connected BLE devices. This means that GATT establishes how two BLE devices send and receive standard messages. Understanding this hierarchy is important because it will make it easier to understand how to use the BLE and write your applications.
+
+
   
      
-     ![BLE architecture image](screenshot/Profile_arch.jpg)
+  ![BLE architecture image](screenshot/Profile_arch.jpg)
 
 
 
+### 4.2.1.1  BLE Service 
+  -The top level of the hierarchy is a profile, which is composed of one or more services. Usually, a BLE device contains more than one service. Every service contains at least one characteristic, or can also reference other services. A service is simply a collection of information, like sensor readings, for example. There are predefined services for several types of data defined by the SIG (Bluetooth Special Interest Group) like Battery Level, Blood Pressure, Heart Rate, Weight Scale, etc.
+
+### 4.2.1.2  BLE Characteristics
+
+-The characteristic is always owned by a service, and it is where the actual data is contained in the hierarchy (value). The characteristic always has two attributes: characteristic declaration (that provides metadata about the data) and the characteristic value. Additionally, the characteristic value can be followed by descriptors, which further expand on the metadata contained in the characteristic declaration. The properties describe how the characteristic value can be interacted with. It contains the operations and procedures that can be used with the following characteristics:
+  - Broadcast
+  - Read
+  - Write
+  - Write without response
+  - Notify
+  - Indicate
+
+### 4.2.1.3  UUID
+Each service, characteristic, and descriptor has a UUID (Universally Unique Identifier). An UUID is a unique 128-bit (16 bytes) number. For example:
+
+`61a902ab-832b-48d7-853e-a542534a3f10`
+
+### GAP
+GAP allows BLE devices to interoperate with each other. It provides a set of rules or procedures so that devices can discover each other, broadcast data, establish secure connections, perform functional operations and set device configurations.
      
-4. **Security Manager Protocol (SMP)**
+### 4.4 **Security Manager Protocol (SMP)**
    - The Security Manager Protocol in BLE is a critical component that handles the security aspects of BLE communication, including pairing, bonding, and encryption.
+
+### 4.5 **Application/Profiles:**
+   - Interfaces directly with the GAP to handle device discovery and connection-related services.
 
 ## 5. Network Topology
 ### 5.1 Broadcast Topology
