@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetooth Web Console</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto 20px auto;
+            padding: 20px;
+            background-color: #34495e;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 1px;
+            font-family: 'Arial', sans-serif;
+            font-size: 3em;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 6px rgba(74, 191, 132, 0.5); /* Add a text shadow */
+            color: #ecf0f1;
+            padding: 10px;
+            border: 2px solid #ecf0f1;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        .card {
+            background-color: #3b5998;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.5em;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 6px rgba(74, 191, 132, 0.5); /* Add a text shadow */
+            padding: 0.5px;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow:
+                        inset 0 -3em 3em rgb(0 200 0 / 30%),
+                        0 0 0 2px white,
+                        0.3em 0.3em 1em rgb(200 0 0 / 60%);
+        }
+        .button {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+            width: 200px;
+        }
+        .button i {
+            margin-right: 8px;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #a777e3, #6e8efb);
+        }
+        .button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        .status {
+            text-align: center;
+            margin-top: 10px;
+            color: #ecf0f1;
+        }
+        .console {
+            background-color: #2c3e50;
+            border: 1px solid #95a5a6;
+            padding: 10px;
+            margin-top: 10px;
+            height: 200px;
+            overflow-y: scroll;
+            border-radius: 4px;
+            text-align: left;
+        }
+        .console p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .inputField {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #95a5a6;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+        .sent {
+            color: #1b8a94;
+        }
+        .received {
+            color: #24af37;
+        }
+        .timestamp {
+            color: #95a5a6;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bluetooth Web Console</h1>
+        <div class="card">
+            <button id="connectButton" class="button"><i class="fas fa-link"></i> Connect</button>
+            <p id="connectionStatus" class="status">Not connected</p>
+        </div>
+        <div class="card">
+            <h2>Bluetooth Terminal</h2>
+            <div id="consoleOutput" class="console"></div>
+            <textarea id="commandInput" class="inputField" placeholder="Enter command"></textarea>
+            <button id="sendButton" class="button" disabled><i class="fas fa-paper-plane"></i> Send Command</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const connectButton = document.getElementById('connectButton');
+        const connectionStatus = document.getElementById('connectionStatus');
+        const consoleOutput = document.getElementById('consoleOutput');
+        const sendButton = document.getElementById('sendButton');
+        const commandInput = document.getElementById('commandInput');
+
+        // Bluetooth Variables
+        let bleDevice;
+        let bleServer;
+        let connected = false;
+
+        // Bluetooth service UUIDs
+        const serviceUUID = '000000ff-0000-1000-8000-00805f9b34fb'; // Replace with your service UUID
+        const characteristicUUID = '0000ff01-0000-1000-8000-00805f9b34fb'; // Replace with your characteristic UUID
+
+        // Initialize button state
+        updateButtonState();
+
+        // Event listener for Connect/Disconnect button
+        connectButton.addEventListener('click', async () => {
+            if (!connected) {
+                try {
+                    bleDevice = await navigator.bluetooth.requestDevice({
+                        acceptAllDevices: true,
+                        optionalServices: [serviceUUID] // Include your service UUID here
+                    });
+
+                    bleServer = await bleDevice.gatt.connect();
+                    connected = true;
+                    connectionStatus.textContent = `${bleDevice.name}`;
+                    // connectionStatus.style.color = "#24af37";
+                    connectionStatus.style.color = "#ecf0f1";
+
+                    await displayServices();
+
+                    updateButtonState();
+																								 
+                    sendButton.disabled = false;
+                } catch (error) {
+                    console.error('Error connecting to Bluetooth device:', error);
+                    connectionStatus.textContent = 'Connection failed';
+                    connectionStatus.style.color = "#d13a30";
+                }
+            } else {
+                try {
+                    if (bleDevice && bleDevice.gatt.connected) {
+                        await bleDevice.gatt.disconnect();
+                        connected = false;
+                        connectionStatus.textContent = 'Disconnected';
+                        connectionStatus.style.color = "#d13a30";
+                        consoleOutput.innerHTML = ''; // Clear console output
+
+                        updateButtonState();
+                        sendButton.disabled = true;
+                    }
+                } catch (error) {
+                    console.error('Error disconnecting from Bluetooth device:', error);
+                }
+            }
+        });
+
+        // Function to display services and characteristics
+        async function displayServices() {
+            try {
+                // Clear console output
+                consoleOutput.innerHTML = '';
+
+                const services = await bleServer.getPrimaryServices();
+                services.forEach(async service => {
+                    const characteristics = await service.getCharacteristics();
+                    characteristics.forEach(characteristic => {
+                        // Listen for characteristic value changes
+                        characteristic.addEventListener('characteristicvaluechanged', handleCharacteristicValueChanged);
+                        characteristic.startNotifications().then(_ => {
+                            console.log('Notifications started');
+                        }).catch(error => {
+                            console.error('Failed to start notifications:', error);
+                        });
+                    });
+                });
+            } catch (error) {
+                console.error('Error fetching services or characteristics:', error);
+            }
+        }
+
+        // Event listener for Send button
+        sendButton.addEventListener('click', async () => {
+            const command = commandInput.value.trim();
+            if (connected && command !== '') {
+                try {
+                    const timestamp = getCurrentTime();
+                    appendToConsole(`<span class="timestamp">${timestamp}</span> ${command}`, 'sent');
+
+                    const service = await bleServer.getPrimaryService(serviceUUID);
+                    const characteristic = await service.getCharacteristic(characteristicUUID);
+
+                    await characteristic.writeValue(new TextEncoder().encode(command));
+                } catch (error) {
+                    console.error('Error sending command:', error);
+                    appendToConsole(`Error: ${error.message}`, 'sent');
+                }
+            }
+        });
+
+        // Function to handle characteristic value changed
+        function handleCharacteristicValueChanged(event) {
+            const value = new TextDecoder().decode(event.target.value);
+            const timestamp = getCurrentTime();
+            appendToConsole(`<span class="timestamp">${timestamp}</span> ${value}`, 'received');
+        }
+
+        // Function to append messages to the console output
+        function appendToConsole(message, type) {
+            const messageElement = document.createElement('p');
+            messageElement.innerHTML = message;
+            messageElement.classList.add(type);
+            consoleOutput.appendChild(messageElement);
+        }
+
+        // Function to update button state (Connect/Disconnect)
+        function updateButtonState() {
+            if (connected) {
+                connectButton.innerHTML = '<i class="fas fa-unlink"></i> Disconnect';
+                connectButton.style.background = 'linear-gradient(135deg, #d13a30, #e74c3c)';
+            } else {
+                connectButton.innerHTML = '<i class="fas fa-link"></i> Connect';
+                connectButton.style.background = 'linear-gradient(135deg, #6e8efb, #a777e3)';
+            }
+        }
+
+        // Function to get current time in HH:MM:SS format
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+    </script>
+</body>
+</html>

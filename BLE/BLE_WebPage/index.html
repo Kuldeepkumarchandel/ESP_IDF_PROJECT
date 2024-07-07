@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetooth Console</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS styles for the page */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .button {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background 0.3s ease;
+            display: inline-block;
+            margin: 10px;
+        }
+        .button i {
+            margin-right: 8px;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #a777e3, #6e8efb);
+        }
+        .console {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: scroll;
+            border-radius: 4px;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+        .console p {
+            margin: 5px 0;
+        }
+        .inputField {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bluetooth Console</h1>
+        <button id="scanButton" class="button"><i class="fas fa-search"></i> Scan Devices</button>
+        <div id="deviceList"></div>
+        <button id="connectButton" class="button" disabled><i class="fas fa-link"></i> Connect</button>
+        <p id="connectionStatus"></p>
+        <div class="console" id="consoleOutput"></div>
+        <textarea id="commandInput" class="inputField" placeholder="Enter command"></textarea>
+        <button id="sendButton" class="button" disabled><i class="fas fa-paper-plane"></i> Send Command</button>
+    </div>
+
+    <script>
+        // JavaScript code for Bluetooth functionality
+const scanButton = document.getElementById('scanButton');
+const connectButton = document.getElementById('connectButton');
+const deviceList = document.getElementById('deviceList');
+const connectionStatus = document.getElementById('connectionStatus');
+const consoleOutput = document.getElementById('consoleOutput');
+const sendButton = document.getElementById('sendButton');
+const commandInput = document.getElementById('commandInput');
+
+let selectedDevice;
+let characteristic;
+
+// Event listener for Scan Devices button
+scanButton.addEventListener('click', async () => {
+    try {
+        const device = await navigator.bluetooth.requestDevice({
+            acceptAllDevices: true,
+            optionalServices: ['battery_service'] // Replace with desired service UUIDs
+        });
+
+        device.addEventListener('gattserverdisconnected', onDisconnected);
+
+        selectedDevice = device;
+        deviceList.textContent = `Selected device: ${device.name}`;
+        connectButton.disabled = false;
+    } catch (error) {
+        console.error('Error scanning or selecting device:', error);
+    }
+});
+
+// Event listener for Connect button
+connectButton.addEventListener('click', async () => {
+    if (!selectedDevice) {
+        console.error('No device selected.');
+        return;
+    }
+
+    try {
+        const server = await selectedDevice.gatt.connect();
+        const service = await server.getPrimaryService('battery_service'); // Replace with desired service UUID
+        characteristic = await service.getCharacteristic('battery_level'); // Replace with desired characteristic UUID
+
+        connectionStatus.textContent = 'Connected';
+        connectionStatus.style.color = 'green';
+        connectButton.disabled = true;
+        sendButton.disabled = false;
+
+        characteristic.addEventListener('characteristicvaluechanged', handleCharacteristicValueChanged);
+        await characteristic.startNotifications();
+    } catch (error) {
+        console.error('Error connecting to device:', error);
+        connectionStatus.textContent = 'Connection failed';
+        connectionStatus.style.color = 'red';
+    }
+});
+
+// Event listener for Send Command button
+sendButton.addEventListener('click', async () => {
+    const command = commandInput.value.trim();
+    if (!characteristic || !command) {
+        console.error('No characteristic or command.');
+        return;
+    }
+
+    try {
+        await characteristic.writeValue(new TextEncoder().encode(command));
+        appendToConsole(`Sent: ${command}`, 'sent');
+    } catch (error) {
+        console.error('Error sending command:', error);
+        appendToConsole(`Error: ${error.message}`, 'sent');
+    }
+});
+
+// Function to handle characteristic value changes
+function handleCharacteristicValueChanged(event) {
+    const value = new TextDecoder().decode(event.target.value);
+    appendToConsole(`Received: ${value}`, 'received');
+}
+
+// Function to handle disconnection
+function onDisconnected() {
+    console.log('Device disconnected.');
+    connectionStatus.textContent = 'Disconnected';
+    connectionStatus.style.color = 'red';
+    connectButton.disabled = false;
+    sendButton.disabled = true;
+}
+
+// Function to append messages to the console
+function appendToConsole(message, type) {
+    const messageElement = document.createElement('p');
+    messageElement.textContent = message;
+    messageElement.classList.add(type);
+    consoleOutput.appendChild(messageElement);
+}
+
+    </script>
+</body>
+</html>
