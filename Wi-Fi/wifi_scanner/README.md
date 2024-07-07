@@ -7,7 +7,7 @@ This project demonstrates how to perform a WiFi scan using an ESP32 microcontrol
 
 ## Requirements
 
-- ESP32 development board
+- ESP development board
 - ESP-IDF development environment
 - USB cable for programming and powering the ESP32
 
