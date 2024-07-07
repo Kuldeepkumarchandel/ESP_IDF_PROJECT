@@ -9,13 +9,13 @@ This project demonstrates how to perform a WiFi scan using an ESP32 microcontrol
 
 - ESP development board
 - ESP-IDF development environment
-- USB cable for programming and powering the ESP32
+- USB cable for programming and powering the ESP Development Board
 
 ### Build and Flash
 
 Build the project and flash it to the board, then run the monitor tool to view the serial output:
 
-Run `idf.py -p PORT flash monitor` to build, flash and monitor the project.
+Run `idf.py -p PORT flash monitor` to build, flash, and monitor the project.
 
 (To exit the serial monitor, type ``Ctrl-]``.)
 
