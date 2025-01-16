@@ -1,7 +1,5 @@
 # ESP_IDF_PROJECT
 
-Adding images to the README can enhance its appeal and clarity. Below is an updated version of the README with placeholders for images. Replace the URLs (`<image_url>`) with actual image links or paths.
-
 ---
 | Supported Targets | ESP32 | ESP32-C3 | ESP32-S3 | ESP32-S2 | ESP32-H6 |
 | ----------------- | ----- | -------- | -------- | -------- | -------- |
@@ -35,7 +33,7 @@ This chapter provides the essential knowledge required to prepare for practical 
 - 12-bit ADC (18 channels) and 8-bit DAC (2 channels).
 - Low-power modes for battery-operated devices.
 
-For a complete list of features, refer to the [full documentation](#).
+For a complete list of features, please take a look at the [full documentation](#).
 
 ---
 
@@ -97,7 +95,6 @@ These features make it ideal for IoT and connected device applications.
 ## 📂 Resources and Links
 
 - [ESP32 Datasheet](https://r.search.yahoo.com/_ylt=AwrKCZyuc4lnEQIASXW7HAx.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Ny/RV=2/RE=1738270895/RO=10/RU=https%3a%2f%2fwww.espressif.com%2fsites%2fdefault%2ffiles%2fdocumentation%2fesp32_datasheet_en.pdf/RK=2/RS=U3u.n_8fGFEXdQLKhAj5k4HXje0-)
-- [Buy ESP32 Modules](#)
 - [Official ESP-IDF Documentation](https://docs.espressif.com/projects/esp-idf/en/latest/)
 
 ---
@@ -108,11 +105,6 @@ In the next chapter, we'll set up the development environment for ESP32 programm
 
 ---
 
-### 🖋 Contribute
-
-Feel free to fork this repository and submit pull requests if you have suggestions or improvements for the course material.
-
----
 
 ### Adding Images
 To host images:
@@ -125,8 +117,8 @@ Let me know if you'd like assistance creating diagrams or sourcing specific imag
 
 This repository contains an ESP-IDF (Espressif IoT Development Framework) project developed by Kuldeep Kumar Chandel.
 
-## Usage
 
-1. **Cloning the Repository:**
+
+ **Cloning the Repository:**
    ```bash
    git clone https://github.com/Kuldeepkumarchandel/ESP_IDF_PROJECT.git
