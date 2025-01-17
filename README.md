@@ -43,7 +43,7 @@ This chapter provides the essential knowledge required to prepare for practical 
 - 12-bit ADC (18 channels) and 8-bit DAC (2 channels).
 - Low-power modes for battery-operated devices.
 
-For a complete list of features, please take a look at the [full documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html?highlight=esp32%20features).
+For a complete list of features, please take a look at the [full documentation](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html).
 
 ---
 
