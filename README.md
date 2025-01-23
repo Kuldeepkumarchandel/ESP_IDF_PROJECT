@@ -97,7 +97,7 @@ ESP32 Development board features GPIO, ADC, DAC, and specialized pins for capaci
 **PWM:** ESP32 development board has support 8-bit 32 channels PWM. The pins with the symbol ‘~’ represent that it has PWM support. It can be used for dimming LEDs or controlling motors etc.
 
 ### ESP32-Capacitive Touch Sensor
-![ESP32-DAC](screenshoot/TOUCH_SENSOR.png)  
+![ESP32-DAC](screenshoot/TOUCH_GPIO.png)  
 *The Capacitive Touch Sensor pinout diagram for the ESP32-WROOM-32.*
 
 **TOUCH Pad:** ESP32 has 10 capacitive sensing GPIOs, that detect physical touch by the human body. This technique can replace mechanical buttons and switches to eliminate mechanical wear and tear
