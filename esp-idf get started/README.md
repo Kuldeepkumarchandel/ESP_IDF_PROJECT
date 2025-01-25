@@ -94,28 +94,49 @@ ESP-IDF provides a wide range of features, including:
    cp -r hello_world ~/esp_projects/my_first_project
    cd ~/esp_projects/my_first_project
    ```
-3. 
+3. You can open a project using **Visual Studio Code**
+
+    Create the example project hello_world: **In VSCODE->"View"->"Command Panel"->Enter: Show Examples projects->Select
+      Use current ESP-IDF(E:\ESP32-IDFlesplesp-idf)->The example ESP-IDF Examples pops up, select get-started->hello_world**
+
+    Create project using the example hello world->Select the path to save the example
+
+   ![ESP32 Features](https://github.com/Kuldeepkumarchandel/ESP_IDF_PROJECT/blob/main/screenshoot/Hello_world.png)
+
    
-4. Configure the project:
+5. Configure the project:
    ```bash
    idf.py menuconfig
    ```
-   ![Menuconfig Tool](https://docs.espressif.com/projects/esp-idf/en/latest/_images/menuconfig.png)
+   ![Menuconfig Tool](https://github.com/Kuldeepkumarchandel/ESP_IDF_PROJECT/blob/main/screenshoot/manuconfig.png)
 
-5. Build the project:
+6. Code
+
+   ```bash
+       void app_main(void)
+       {
+          printf("Hello world!\n");
+      
+       }
+
+   ```
+
+7. Build the project:
    ```bash
    idf.py build
    ```
-   ![Build Output](https://docs.espressif.com/projects/esp-idf/en/latest/_images/build-output.png)
+  
 
-6. Flash the firmware to the ESP32:
+8. Flash the firmware to the ESP32:
    ```bash
    idf.py -p [PORT] flash
    ```
-7. Monitor the serial output:
+9. Monitor the serial output:
    ```bash
    idf.py monitor
    ```
+    ![Build Output](https://github.com/Kuldeepkumarchandel/ESP_IDF_PROJECT/blob/main/screenshoot/OUTPUT.png)
+   
    Press `Ctrl+]` to exit the monitor.
 
 
@@ -123,7 +144,7 @@ ESP-IDF provides a wide range of features, including:
 ## Troubleshooting
 
 - **Build Errors:** Ensure all dependencies are installed and environment variables are correctly set.
-- **Serial Port Issues:** Verify the port and ensure no other application is using it.
+- **Serial Port Issues:** Verify the port and ensure no other application uses it.
 - **Flashing Errors:** Place the ESP32 in flashing mode by holding the BOOT button if necessary.
 
 ---
